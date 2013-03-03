@@ -7,6 +7,12 @@ import com.google.gson.JsonArray;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
 
 
 
@@ -57,12 +63,17 @@ public class Extractor {
     
     public void test1(){
         
-        String movieJSON = CommAPI.getMovie(770672122);
+        String movieJSON = CommAPI.getMovie("770672122");
         Gson gson = new GsonBuilder().create();
         Movie m = gson.fromJson(movieJSON, Movie.class);
         m.getReviews();
         ArrayList<Integer> sim = m.getSimilar();
-        
+
+        String ret = m.toXML();
+        System.out.println(ret);
+       
+
+       
         
         
         

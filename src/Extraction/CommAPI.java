@@ -77,7 +77,7 @@ public class CommAPI {
     }
     
     
-    public static String getMovie(int ID){
+    public static String getMovie(String ID){
         try {
             //prepare HTTP request
             
@@ -121,7 +121,7 @@ public class CommAPI {
     }
     
     
-    public static String getReviewsFromMovie(int ID){
+    public static String getReviewsFromMovie(String ID){
         
 
         try {
@@ -166,7 +166,7 @@ public class CommAPI {
     }
     
     
-    public static String getSimilarMovies(int ID){
+    public static String getSimilarMovies(String ID){
         
 
         try {
