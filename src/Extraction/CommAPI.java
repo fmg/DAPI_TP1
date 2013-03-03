@@ -43,6 +43,31 @@ public class CommAPI {
     }
     
     
+    public static String getTopRentals(int number){
+
+        int num = 50;
+        if(number < 50)
+            num = number;
+        
+        String url = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=" + API_KEY +"&limit="+num;
+        
+        return executeHTTPGet(url);
+        
+    }
+    
+    
+    public static String getCurrentReleases(int number){
+        
+        int num = 50;
+        if(number < 50)
+            num = number;
+        
+        String url = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/current_releases.json?apikey=" + API_KEY +"&limit="+num;
+        
+        return executeHTTPGet(url);
+    }
+    
+    
     public static String getMovie(String ID){
                 
         String url = "http://api.rottentomatoes.com/api/public/v1.0/movies/"+ ID+".json?apikey=" + API_KEY;

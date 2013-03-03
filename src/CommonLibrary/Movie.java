@@ -53,6 +53,9 @@ public class Movie implements Serializable{
         reviews = new ArrayList<Review>();
     }
     
+    public String getId() {
+        return id;
+    }
     
     public void getReviews(){
         String reviewsJSON = CommAPI.getReviewsFromMovie(id);
@@ -166,8 +169,21 @@ public class Movie implements Serializable{
             
             //abridged_directors
             Element abridged_directorsNode = document.createElement("abridged_directors");
-            for(Director dir: abridged_directors){
-                dir.toXML(abridged_directorsNode, document);
+            if(abridged_directors != null){
+                for(Director dir: abridged_directors){
+                    dir.toXML(abridged_directorsNode, document);
+                }
+            }else{
+                Element directorNode = document.createElement("director");
+      
+                //name
+                Element dirNameNode = document.createElement("name");
+                dirNameNode.setTextContent(new String("-"));
+                directorNode.appendChild(dirNameNode);
+
+
+                //append director to directorsNode
+                abridged_directorsNode.appendChild(directorNode);
             }
             documentElement.appendChild(abridged_directorsNode);
             
