@@ -3,16 +3,9 @@ package Extraction;
 import CommonLibrary.Movie;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
 
 
 
@@ -45,21 +38,14 @@ public class Extractor {
         return storedIDs.contains(id);
     }
     
-    
-    private void sendMovieToXMLFile(Movie m){
-        
-    }
-    
+     
     
     public void extract(){
         
         
     }
     
-    private ArrayList<Movie> extractMoviesFromJSON(JsonArray mArray){
-        return null;
-        
-    }
+    
     
     public void test1(){
         
