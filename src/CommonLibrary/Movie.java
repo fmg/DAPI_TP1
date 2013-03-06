@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.lang.reflect.Type;
+import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +37,7 @@ public class Movie implements Serializable{
     private int year;
     private ArrayList<String> genres;
     private String mpaa_rating;
-    private int runtime;
+    private String runtime;
     private String critics_consensus;
     private Rating ratings;
     private String synopsis; 
@@ -91,7 +92,7 @@ public class Movie implements Serializable{
     }
     
     
-    public String toXML(){
+    public String toXML() throws Exception{
        
         try {
             
@@ -141,7 +142,11 @@ public class Movie implements Serializable{
 
             //runtime
             Element runtimeNode = document.createElement("runtime");
-            runtimeNode.setTextContent(String.valueOf(runtime));
+            if(runtime == null){
+                runtimeNode.setTextContent(new String("-"));
+            }else{
+                runtimeNode.setTextContent(runtime);
+            }
             documentElement.appendChild(runtimeNode);
             
             //runtime
@@ -156,6 +161,10 @@ public class Movie implements Serializable{
             
             //synopsis
             Element synopsisNode = document.createElement("synopsis");
+            if(synopsis == null){
+                System.out.println("Synopsis missing");
+                throw new Exception();
+            }
             synopsisNode.setTextContent(synopsis);
             documentElement.appendChild(synopsisNode);
             

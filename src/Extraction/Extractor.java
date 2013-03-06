@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.FileWriter;
@@ -75,10 +76,16 @@ public class Extractor {
                     queuedMovieIDs.add(i);
                 }
                 
-                String movieXML = m.toXML();
-                fileWriter.write(movieXML);
+                String movieXML;
+                try {
+                    movieXML = m.toXML();
+                    fileWriter.write(movieXML);
                 
-                storedIDs.add(mID);
+                    storedIDs.add(mID);
+                } catch (Exception ex) {
+                    System.out.println("\n\nERRO A OBTER FILME /FILME SEM SYNOPSYS " + mID);
+                }
+                
             }else{
                 System.out.println("\n\nDuplicate detected ->" + mID + "\n\n");
 
@@ -103,21 +110,25 @@ public class Extractor {
             
             if(!storedIDs.contains(i)){
                 String movJSON = CommAPI.getMovie(i.toString());
-                Movie movie = gson.fromJson(movJSON, Movie.class);
-                movie.getReviews();
-                ArrayList<Integer> similars = movie.getSimilar();
-                
-                for(Integer simID: similars){
-                    if(!storedIDs.contains(simID)){
-                        if(!queuedMovieIDs.contains(simID)){
-                            newQueuedMovies.add(simID);
+                try{
+                    Movie movie = gson.fromJson(movJSON, Movie.class);
+                    movie.getReviews();
+                    ArrayList<Integer> similars = movie.getSimilar();
+
+                    for(Integer simID: similars){
+                        if(!storedIDs.contains(simID)){
+                            if(!queuedMovieIDs.contains(simID)){
+                                newQueuedMovies.add(simID);
+                            }
                         }
                     }
+
+
+                    fileWriter.write(movie.toXML());
+                    storedIDs.add(i);
+                } catch (Exception ex) {
+                    System.out.println("\n\nERRO A OBTER FILME /FILME SEM SYNOPSYS " + i);
                 }
-                
-                
-                fileWriter.write(movie.toXML());
-                storedIDs.add(i);
                 
             }else{
                 System.out.println("\n\nDuplicate detected ->" + i.toString() + "\n\n");

@@ -97,6 +97,7 @@ public class CommAPI {
     
     static private String executeHTTPGet(String url){
          try {
+             System.out.println("Request URL-> " + url);
             //prepare HTTP request
             String result = null;
             
