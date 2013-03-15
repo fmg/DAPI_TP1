@@ -40,7 +40,7 @@ public class Review implements Serializable{
         
         //original_score
         Element original_scoreNode = document.createElement("original_score");
-        if(original_score == null)
+        if(original_score == null || original_score.equals(""))
             original_scoreNode.setTextContent(new String("-"));
         else
             original_scoreNode.setTextContent(original_score);
@@ -57,7 +57,7 @@ public class Review implements Serializable{
         reviewNode.appendChild(publicationNode);
         
         
-        //publication
+        //quote
         Element quoteNode = document.createElement("quote");
         quoteNode.setTextContent(quote);
         reviewNode.appendChild(quoteNode);
