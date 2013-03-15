@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.FileWriter;
@@ -149,7 +148,19 @@ public class Extractor {
             
             fileWriter.write(XML_HEADER);
             fileWriter.write("<movies>\n");
-        
+            
+            /*           
+            String tmpM = CommAPI.getMovie("18580");
+            Gson gson = new GsonBuilder().create();
+            Movie m = gson.fromJson(tmpM, Movie.class);
+            try {
+                m.toXML();
+            } catch (Exception ex) {
+                Logger.getLogger(Extractor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            */
+            
+            
             System.out.println("BOX OFFICE MOVIES");
             String movies = CommAPI.getBoxOfficeMovies(moviesLeft);
             extractMovies(movies, fileWriter);

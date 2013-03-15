@@ -142,7 +142,7 @@ public class Movie implements Serializable{
 
             //runtime
             Element runtimeNode = document.createElement("runtime");
-            if(runtime == null){
+            if(runtime == null || runtime.equals("")){
                 runtimeNode.setTextContent(new String("-"));
             }else{
                 runtimeNode.setTextContent(runtime);
@@ -161,7 +161,7 @@ public class Movie implements Serializable{
             
             //synopsis
             Element synopsisNode = document.createElement("synopsis");
-            if(synopsis == null){
+            if(synopsis == null || synopsis.equals("")){
                 System.out.println("Synopsis missing");
                 throw new Exception();
             }
