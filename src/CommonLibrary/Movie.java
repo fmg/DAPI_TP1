@@ -149,7 +149,7 @@ public class Movie implements Serializable{
             }
             documentElement.appendChild(runtimeNode);
             
-            //runtime
+            //critics_consensus
             Element critics_consensusNode = document.createElement("critics_consensus");
             critics_consensusNode.setTextContent(String.valueOf(critics_consensus));
             documentElement.appendChild(critics_consensusNode);
